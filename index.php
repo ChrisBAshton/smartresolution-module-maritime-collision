@@ -5,16 +5,27 @@ declare_module(array(
     'title'       => 'Maritime Collision',
     'description' => 'Custom dispute type: Maritime Collision'
 ), function () {
-
+    // top-level routes
     top_level_route('/maritime-collision-about', 'MaritimeCollision->about');
     top_level_route('/maritime-collision-search', 'MaritimeCollision->search');
-    route('/maritime-collision', 'MaritimeCollision->index');
 
+    // dispute-level routes
+    route('/maritime-collision', 'MaritimeCollision->route');
+    route('/initiate-maritime-collision', 'MaritimeCollision->markAsInitiated');
+
+    // hooked events
     on('dispute_dashboard', 'MaritimeCollision->showMaritimeCollisionOption', 'high');
-
 });
 
 class MaritimeCollision {
+
+    private $maritimeStarted = false;
+
+    function __construct() {
+        if (get_dispute_property('initiated') === 'true') {
+            $this->maritimeStarted = true;
+        }
+    }
 
     public function showMaritimeCollisionOption() {
         dashboard_add_items(array(
@@ -36,14 +47,27 @@ class MaritimeCollision {
         ));
     }
 
-    public function index() {
-        render(
-            get_module_url() . '/views/index.html'
-        );
+    public function route() {
+        if (!$this->maritimeStarted) {
+            render(
+                get_module_url() . '/views/get_started.html',
+                array(
+                    'disputeUrl' => get_dispute_url()
+                )
+            );
+        }
+        else {
+            render(get_module_url() . '/views/started.html');
+        }
     }
 
     public function about() {
         render_markdown(get_module_url() . '/views/about.md');
+    }
+
+    public function markAsInitiated() {
+        set_dispute_property('initiated', 'true');
+        header('Location: ' . get_dispute_url() . '/maritime-collision');
     }
 
     public function search() {
