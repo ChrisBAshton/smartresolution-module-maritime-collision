@@ -8,7 +8,9 @@ It adds a "maritime collision" dispute type, which supports specialised question
 
 This is a temporary list, exploring what is required of the underling system for this module to be supported:
 
-* we may need to add an item when the dispute is in negotiation, fully underway, or in mediation, so the platform should support that level of specificity.
+* DISPUTE STATUS CHECK: we need to check when the dispute is in negotiation, fully underway, or in mediation, etc. The maritime collision module should only allow maritime collision AI when the dispute is fully underway.
+* ACCOUNT STATUS CHECK: account types such as Mediator or Law Firm should not be able to fill in the maritime collision forms. Only Agents should do this.
+* There should be a way of changing a dispute type on the fly - perhaps a collision dispute started out as 'Other' but then the Maritime Collision module was installed afterwards.
 
 ## Acknowledgements
 
