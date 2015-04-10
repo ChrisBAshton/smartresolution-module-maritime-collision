@@ -1,5 +1,24 @@
 [
     {
+        "id":   "article_1",
+        "text": "Which vessels were damaged?",
+        "type": "select",
+        "options": [
+            {
+                "text" : "The vessel of my client",
+                "value": "mine"
+            },
+            {
+                "text" : "The vessel of the other party",
+                "value": "other"
+            },
+            {
+                "text" : "Both vessels",
+                "value": "both"
+            }
+        ]
+    },
+    {
         "id":   "article_2",
         "text": "Was the collision accidental, caused by force majeure, or otherwise is the cause of the collision left in doubt?",
         "info": "This question is applicable notwithstanding the fact that the vessels, or any one of them, may be at anchor (or otherwise made fast) at the time of the casualty.",

@@ -8,6 +8,12 @@
             <?php echo $question['text']; ?>
         </h3>
 
+        <?php if (isset($question['info'])) : ?>
+            <p>
+                <?php echo $question['info']; ?>
+            </p>
+        <?php endif; ?>
+
         <?php
         switch($question['type']) {
             case "radio":

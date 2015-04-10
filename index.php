@@ -21,16 +21,24 @@ declare_module(array(
         )
     ));
 
-    // top-level routes
-    top_level_route('/about-maritime-collision', 'MaritimeCollision->about');
-    top_level_route('/maritime-collision-search', 'MaritimeCollision->search');
+    // hooked events
+    on('homescreen_dashboard', 'MaritimeCollision->showMaritimeCollisionMetaOptions', 'low');
+    on('dispute_dashboard', 'MaritimeCollision->showMaritimeCollisionOption', 'high');
 
     // dispute-level routes
     route('/maritime-collision', 'MaritimeCollision->maritimeCollisionIndex');
     route('/initiate-maritime-collision', 'MaritimeCollision->initiateMaritimeCollision');
     route('/answer-maritime-collision-question', 'MaritimeCollision->answerQuestion');
 
-    // hooked events
-    on('homescreen_dashboard', 'MaritimeCollision->showMaritimeCollisionMetaOptions', 'low');
-    on('dispute_dashboard', 'MaritimeCollision->showMaritimeCollisionOption', 'high');
+    // top-level routes
+    top_level_route('/about-maritime-collision', function () {
+        render_markdown(get_module_url() . '/views/about.md');
+    });
+
+    top_level_route('/maritime-collision-search', function () {
+        render(
+            get_module_url() . '/views/search.html',
+            array('time' => date('d/m/Y, h:i:s', time()))
+        );
+    });
 });
