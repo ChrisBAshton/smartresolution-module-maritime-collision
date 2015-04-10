@@ -1,8 +1,10 @@
 <h1>Results</h1>
 
-<p class="bg-padded bg-info">
-    <?php echo $summary; ?>
-</p>
+<?php foreach($summaries as $summary): ?>
+    <p class="bg-padded bg-info">
+        <?php echo $summary; ?>
+    </p>
+<?php endforeach; ?>
 
 <h1>Q&amp;A breakdown</h1>
 

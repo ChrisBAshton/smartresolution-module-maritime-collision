@@ -1,5 +1,26 @@
 [
     {
+        "id":   "article_11",
+        "text": "Is either vessel a ship of war or Government ship appropriated exclusively to a public service?",
+        "type": "radio",
+        "options": [
+            {
+                "text" : "Yes",
+                "value": "yes"
+            },
+            {
+                "text" : "No",
+                "value": "no"
+            }
+        ]
+    },
+    {
+        "prerequisites": [
+            {
+                "question_id":     "article_11",
+                "required_answer": "no"
+            }
+        ],
         "id":   "article_1",
         "text": "Which vessels were damaged?",
         "type": "select",
@@ -19,6 +40,12 @@
         ]
     },
     {
+        "prerequisites": [
+            {
+                "question_id":     "article_11",
+                "required_answer": "no"
+            }
+        ],
         "id":   "article_2",
         "text": "Was the collision accidental, caused by force majeure, or otherwise is the cause of the collision left in doubt?",
         "info": "This question is applicable notwithstanding the fact that the vessels, or any one of them, may be at anchor (or otherwise made fast) at the time of the casualty.",
@@ -56,6 +83,48 @@
             {
                 "text" : "Both vessels",
                 "value": "both"
+            }
+        ]
+    },
+    {
+        "prerequisites": [
+            {
+                "question_id":     "article_2",
+                "required_answer": "no"
+            }
+        ],
+        "id": "article_7a",
+        "text": "Did this collision happen less than two years ago?",
+        "type": "radio",
+        "options": [
+            {
+                "text" : "Yes",
+                "value": "yes"
+            },
+            {
+                "text" : "No",
+                "value": "no"
+            }
+        ]
+    },
+    {
+        "prerequisites": [
+            {
+                "question_id":     "article_7a",
+                "required_answer": "no"
+            }
+        ],
+        "id": "article_7b",
+        "text": "Has it been possible to arrest the defendant vessel in the territorial waters of the State in which the plaintiff has his domicile or principal place of business?",
+        "type": "radio",
+        "options": [
+            {
+                "text" : "Yes",
+                "value": "yes"
+            },
+            {
+                "text" : "No",
+                "value": "no"
             }
         ]
     }
