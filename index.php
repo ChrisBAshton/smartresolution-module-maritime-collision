@@ -60,7 +60,7 @@ class MaritimeCollision {
      * checkMaritimeStatus() should be called before rendering Maritime Collision dispute pages.
      */
     private function checkMaritimeStatus() {
-        if (!get('setup.id_of_first_agent')) {
+        if (get('setup.id_of_first_agent') === false) {
             // record was not found - this is the first time the module has been loaded in the dispute.
             // We need to create a record. Setting one property is enough to create the entire row.
             // The id of the second agent will be set to default value
