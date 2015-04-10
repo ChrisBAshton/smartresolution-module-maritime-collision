@@ -99,7 +99,7 @@ class ResultsCalculator {
             $summary = $this->deduceSummary($results);
         }
         else {
-            $summary = "Unfortunately, your version of events conflicts with the other agent's version of events. In court, they would now examine your evidence to try and establish which version of events is correct. The SmartResolution Maritime Collision module is currently incapable of doing this.";
+            $summary = array("Unfortunately, your version of events conflicts with the other agent's version of events. In court, they would now examine your evidence to try and establish which version of events is correct. The SmartResolution Maritime Collision module is currently incapable of doing this.");
         }
 
         return $summary;
