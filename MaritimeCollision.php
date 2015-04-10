@@ -31,6 +31,8 @@ class MaritimeCollision {
 
     /**
      * checkMaritimeStatus() should be called before rendering Maritime Collision dispute pages.
+     * It was tempting to put this in a constructor but that causes problems when calling dispute-independent
+     * pages, such as "About Maritime Collision".
      */
     private function checkMaritimeStatus() {
         if (get('setup.id_of_first_agent') === false) {
@@ -39,10 +41,11 @@ class MaritimeCollision {
             // defined some defaults in the table setup.
             createRow('setup');
         }
-        else {
-           $this->firstAgent  = (int) get('setup.id_of_first_agent');
-           $this->secondAgent = (int) get('setup.id_of_second_agent');
-        }
+
+        // these don't necessarily correspond to Agent A or Agent B in the SmartResolution core software,
+        // we just need to identify the two agents and keep them separate. The ordering doesn't matter.
+        $this->firstAgent  = (int) get('setup.id_of_first_agent');
+        $this->secondAgent = (int) get('setup.id_of_second_agent');
     }
 
     public function maritimeCollisionIndex() {

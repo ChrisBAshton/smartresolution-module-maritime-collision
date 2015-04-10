@@ -26,7 +26,7 @@
         "type": "select",
         "options": [
             {
-                "text" : "My client's vessel",
+                "text" : "The vessel of my client",
                 "value": "mine"
             },
             {
@@ -34,7 +34,7 @@
                 "value": "other"
             },
             {
-                "text" : "Both vessels are at fault",
+                "text" : "Both vessels",
                 "value": "both"
             }
         ]
