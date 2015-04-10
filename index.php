@@ -1,7 +1,8 @@
 <?php
-
+// load module dependencies
 require 'MaritimeCollision.php';
 
+// module definition
 declare_module(array(
     'key'         => 'maritime_collision',
     'title'       => 'Maritime Collision',
@@ -34,7 +35,6 @@ declare_module(array(
     top_level_route('/about-maritime-collision', function () {
         render_markdown(get_module_url() . '/views/about.md');
     });
-
     top_level_route('/maritime-collision-search', function () {
         render(
             get_module_url() . '/views/search.html',

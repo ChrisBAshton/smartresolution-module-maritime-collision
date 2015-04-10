@@ -37,7 +37,8 @@
     {
         "prerequisites": [
             {
-                "article_2": "No"
+                "question_id":     "article_2",
+                "required_answer": "no"
             }
         ],
         "id": "article_3",

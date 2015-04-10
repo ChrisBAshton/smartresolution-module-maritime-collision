@@ -135,14 +135,15 @@ class MaritimeCollision {
     }
 
     private function checkIfResultsAreReady() {
-        if ($this->bothAgentsInitiated()) {
-            $questionsForFirstAgent  = $this->getQuestionsForAgent($this->firstAgent);
-            $questionsForSecondAgent = $this->getQuestionsForAgent($this->firstAgent);
-            $this->resultsReady      = (
-                count($questionsForFirstAgent)  === 0 &&
-                count($questionsForSecondAgent) === 0
-            );
-        }
+        $this->resultsReady = (
+            $this->bothAgentsInitiated() &&
+            $this->agentHasAnsweredAllQuestions($this->firstAgent) &&
+            $this->agentHasAnsweredAllQuestions($this->secondAgent)
+        );
+    }
+
+    private function agentHasAnsweredAllQuestions($agentID) {
+        return (0 === count($this->getQuestionsForAgent($agentID)));
     }
 
     private function getQuestionsForAgent($agentID) {
@@ -151,12 +152,12 @@ class MaritimeCollision {
         $questions    = array();
 
         foreach($allQuestions as $question) {
-            $answer = get('answers.answer', array(
+            $alreadyAnswered = get('answers.answer', array(
                 'agent_id' => $agentID,
                 'question' => $question['id']
             ));
 
-            if (!$answer) {
+            if (!$alreadyAnswered && $this->satisfiesPrerequisites($question, $agentID)) {
                 array_push($questions, $question);
             }
         }
@@ -164,4 +165,19 @@ class MaritimeCollision {
         return $questions;
     }
 
+    private function satisfiesPrerequisites($question, $agentID) {
+        if (isset($question['prerequisites'])) {
+            foreach($question['prerequisites'] as $prereq) {
+                $prereqAnswer = get('answers.answer', array(
+                    'agent_id' => $agentID,
+                    'question' => $prereq['question_id'],
+                    'answer'   => $prereq['required_answer']
+                ));
+                if (!$prereqAnswer) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
