@@ -1,6 +1,7 @@
 <?php
 // load module dependencies
 require 'MaritimeCollision.php';
+require 'ResultsCalculator.php';
 
 // module definition
 declare_module(array(

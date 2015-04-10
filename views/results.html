@@ -1,5 +1,26 @@
 <h1>Results</h1>
 
-<p>
-    Results are now ready. @TODO
+<p class="bg-padded bg-info">
+    <?php echo $summary; ?>
 </p>
+
+<h1>Q&amp;A breakdown</h1>
+
+<?php foreach($results as $result) : ?>
+
+    <h3><?php echo $result['question']; ?></h3>
+
+    <p>Your answer: <?php echo $result['your_answer']; ?></p>
+
+    <p>Other agent's answer: <?php echo $result['their_answer']; ?></p>
+
+    <p>
+        Do the answers tally?
+
+        <?php
+        $class = $result['tally'] === 'YES' ? 'text-success' : 'text-danger';
+        echo '<strong class="' . $class . '">' . $result['tally'] . '</strong>';
+        ?>
+    </p>
+
+<?php endforeach; ?>

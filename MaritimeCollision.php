@@ -34,7 +34,7 @@ class MaritimeCollision {
 
         if ($this->bothAgentsInitiated()) {
             if ($this->resultsReady) {
-                $this->renderResults();
+                new ResultsCalculator();
             }
             else {
                 $this->renderQuestions();
@@ -75,10 +75,6 @@ class MaritimeCollision {
                 'waitingFor' => 'the other agent to answer some questions.'
             ));
         }
-    }
-
-    public function renderResults() {
-        render(get_module_url() . '/views/results.html');
     }
 
     public function initiateMaritimeCollision() {
