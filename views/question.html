@@ -1,15 +1,66 @@
-<h1>Maritime collision</h1>
+<h1>Questions</h1>
 
-<p>
-    Welcome to the Maritime Collision approximator. This is an automated resolution facility which will ask both agents structured, maritime-specific questions. At the end of the questioning, the approximator will run a court simulation and give a heuristically-driven summary of what might happen should the dispute be taken to court.
-</p>
+<form action="<?php echo $disputeUrl; ?>/answer-maritime-collision-question" method="post">
 
-<p class="bg-warning">
-    The approximator is only an indication of what might happen in court, and should by no means be taken as fact. The developers of the maritime collision module cannot be held responsible for inaccurate predictions.
-</p>
+    <?php foreach($questions as $question) : ?>
 
-<form method="post" action="<?php echo $disputeUrl; ?>/initiate-maritime-collision">
-    <p class="text-center">
-        <button class="btn btn-lg btn-primary" type="submit">I understand</button>
-    </p>
+        <h3>
+            <?php echo $question['text']; ?>
+        </h3>
+
+        <?php
+        switch($question['type']) {
+            case "radio":
+                renderRadio($question);
+                break;
+            case "select":
+                renderSelect($question);
+                break;
+            default:
+                echo '<p>Unknown question type. Please contact an admin.</p>';
+        }
+        ?>
+
+    <?php endforeach; ?>
+
+    <div class="col-lg-12 text-center">
+        <button class="btn btn-lg btn-primary" type="submit">Submit answers</button>
+    </div>
 </form>
+
+<?php function renderRadio($question) { ?>
+
+    <div class="col-lg-12">
+        <p>
+            <?php foreach($question['options'] as $option): ?>
+
+                <input
+                    type="radio"
+                    id="<?php echo $question['id'] . $option['value']; ?>"
+                    name="<?php echo $question['id']; ?>"
+                    value="<?php echo $option['value']; ?>"
+                />
+
+                <label for="<?php echo $question['id'] . $option['value']; ?>"><?php echo $option['text']; ?></label>
+
+                &nbsp;
+
+            <?php endforeach; ?>
+        </p>
+    </div>
+
+<?php } ?>
+
+<?php function renderSelect($question) { ?>
+
+    <div class="col-lg-12">
+        <select class="form-control" name="<?php echo $question['id']; ?>">
+            <?php foreach($question['options'] as $option): ?>
+
+                <option value="<?php echo $option['value']; ?>"><?php echo $option['text']; ?></option>
+
+            <?php endforeach; ?>
+        </select>
+    </div>
+
+<?php } ?>

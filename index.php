@@ -28,6 +28,7 @@ declare_module(array(
     // dispute-level routes
     route('/maritime-collision', 'MaritimeCollision->maritimeCollisionIndex');
     route('/initiate-maritime-collision', 'MaritimeCollision->initiateMaritimeCollision');
+    route('/answer-maritime-collision-question', 'MaritimeCollision->answerQuestion');
 
     // hooked events
     on('homescreen_dashboard', 'MaritimeCollision->showMaritimeCollisionMetaOptions', 'low');

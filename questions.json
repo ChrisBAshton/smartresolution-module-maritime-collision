@@ -1,0 +1,42 @@
+[
+    {
+        "id":   "article_2",
+        "text": "Was the collision accidental, caused by force majeure, or otherwise is the cause of the collision left in doubt?",
+        "info": "This question is applicable notwithstanding the fact that the vessels, or any one of them, may be at anchor (or otherwise made fast) at the time of the casualty.",
+        "type": "radio",
+        "options": [
+            {
+                "text" : "Yes",
+                "value": "yes"
+            },
+            {
+                "text" : "No",
+                "value": "no"
+            }
+        ]
+    },
+    {
+        "prerequisites": [
+            {
+                "article_2": "No"
+            }
+        ],
+        "id": "article_3",
+        "text": "Which of the vessels are at fault for the collision?",
+        "type": "select",
+        "options": [
+            {
+                "text" : "My client's vessel",
+                "value": "mine"
+            },
+            {
+                "text" : "The vessel of the other party",
+                "value": "other"
+            },
+            {
+                "text" : "Both vessels are at fault",
+                "value": "both"
+            }
+        ]
+    }
+]

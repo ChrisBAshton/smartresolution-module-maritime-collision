@@ -35,9 +35,9 @@ class MaritimeCollision {
     private function checkMaritimeStatus() {
         if (get('setup.id_of_first_agent') === false) {
             // record was not found - this is the first time the module has been loaded in the dispute.
-            // We need to create a record. Setting one property is enough to create the entire row.
-            // The id of the second agent will be set to default value
-            set('setup.id_of_first_agent', '0');
+            // We need to create a record. No need to manually specify any property values, since we've
+            // defined some defaults in the table setup.
+            createRow('setup');
         }
         else {
            $this->firstAgent  = (int) get('setup.id_of_first_agent');
@@ -49,7 +49,12 @@ class MaritimeCollision {
         $this->checkMaritimeStatus();
 
         if ($this->firstAgent > 0 && $this->secondAgent > 0) {
-            render(get_module_url() . '/views/started.html');
+            if ($this->resultsReady) {
+                $this->renderResults();
+            }
+            else {
+                $this->renderQuestions();
+            }
         }
         else if (
             $this->firstAgent  === get_login_id() ||
@@ -57,19 +62,27 @@ class MaritimeCollision {
         ) {
             render(get_module_url() . '/views/waiting.html');
         }
-        else if (!$this->resultsReady) {
-            $this->renderQuestions();
-        }
         else {
-            $this->renderResults();
+            render(
+                get_module_url() . '/views/get_started.html',
+                array(
+                    'disputeUrl' => get_dispute_url()
+                )
+            );
         }
     }
 
     public function renderQuestions() {
+        $string    = file_get_contents(__DIR__ . '/questions.json');
+        $questions = json_decode($string, true);
+
+        // @TODO - filter the questions to only ask the appropriate one.
+
         render(
             get_module_url() . '/views/question.html',
             array(
-                'disputeUrl' => get_dispute_url()
+                'disputeUrl' => get_dispute_url(),
+                'questions'  => $questions
             )
         );
     }
@@ -102,6 +115,17 @@ class MaritimeCollision {
             set('setup.id_of_second_agent', $loggedInAgent);
         }
 
+        header('Location: ' . get_dispute_url() . '/maritime-collision');
+    }
+
+    public function answerQuestion($f3) {
+        foreach($f3->get('POST') as $questionID => $value) {
+            createRow('answers', array(
+                'agent_id' => get_login_id(),
+                'question' => $questionID,
+                'answer'   => $value
+            ));
+        }
         header('Location: ' . get_dispute_url() . '/maritime-collision');
     }
 
