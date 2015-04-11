@@ -1,3 +1,5 @@
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
+
 # Maritime Collision
 
 This is a module for the [SmartResolution](http://smartresolution.org) online dispute resolution platform.
