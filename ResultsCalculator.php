@@ -177,7 +177,7 @@ class ResultsCalculator {
 
                     $couldHaveArrestedDefendant = $this->getResultsForQuestion('article_7b', $results)['your_answer'];
 
-                    if ($couldHaveArrestedDefendant === 'no') {
+                    if ($couldHaveArrestedDefendant === 'yes') {
                         $summary[] = "According to Article 7, actions for the recovery of damages are barred after an interval of two years from the date of the casualty. Neither party can recover damages from the other.";
                     }
                     else {
