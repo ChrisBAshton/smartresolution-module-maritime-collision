@@ -7,7 +7,7 @@ require 'ResultsCalculator.php';
 declare_module(array(
     'key'         => 'maritime_collision',
     'title'       => 'Maritime Collision',
-    'description' => 'Custom dispute type: Maritime Collision'
+    'description' => 'Adds the "Maritime Collision" custom dispute type to help in automated dispute resolution. The encoded business logic is based on the Convention for the Unification of Certain Rules of Law with respect to Collisions between Vessels.'
 ), function () {
 
     // tables
