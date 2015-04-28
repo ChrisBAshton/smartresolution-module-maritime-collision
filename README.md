@@ -1,17 +1,10 @@
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
 
 # Maritime Collision
 
 This is a module for the [SmartResolution](http://smartresolution.org) online dispute resolution platform.
 
 It adds a "maritime collision" dispute type, which supports specialised questions and then an approximation of what might happen in court, based on the given answers and maritime law itself.
-
-## @TODO
-
-This is a temporary list, exploring what is required of the underling system for this module to be supported:
-
-* DISPUTE STATUS CHECK: we need to check when the dispute is in negotiation, fully underway, or in mediation, etc. The maritime collision module should only allow maritime collision AI when the dispute is fully underway.
-* ACCOUNT STATUS CHECK: account types such as Mediator or Law Firm should not be able to fill in the maritime collision forms. Only Agents should do this.
 
 ## Acknowledgements
 
