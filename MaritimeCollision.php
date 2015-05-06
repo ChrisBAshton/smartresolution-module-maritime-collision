@@ -92,6 +92,12 @@ class MaritimeCollision {
             set('setup.id_of_second_agent', $loggedInAgent);
         }
 
+        notify(
+            other_agent_to($loggedInAgent),
+            'The other agent has just agreed to the maritime collision disclaimer.',
+            get_dispute_url() . '/maritime-collision'
+        );
+
         header('Location: ' . get_dispute_url() . '/maritime-collision');
     }
 
@@ -103,6 +109,13 @@ class MaritimeCollision {
                 'answer'   => $value
             ));
         }
+
+        notify(
+            other_agent_to(get_login_id()),
+            'The other agent has just answered a maritime collision question.',
+            get_dispute_url() . '/maritime-collision'
+        );
+
         header('Location: ' . get_dispute_url() . '/maritime-collision');
     }
 
